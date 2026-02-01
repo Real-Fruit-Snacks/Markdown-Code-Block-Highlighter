@@ -45,6 +45,22 @@ desktop.ini
 # Package files
 *.vsix
 
+# Test and diagnostic reports
+TEST_REPORT.md
+test-report.txt
+TESTING.md
+TESTING_GUIDE.md
+TEST_PROCEDURES.md
+QA.md
+DEBUG_SUMMARY.md
+DIAGNOSTIC_FINDINGS.md
+benchmark-report.json
+*-report.json
+*-report.txt
+
+# Test directories (keep src/test)
+/test/
+
 # Environment
 .env
 .env.local
