@@ -1,0 +1,201 @@
+{
+  "name": "markdown-code-block-highlighter",
+  "displayName": "Markdown Code Block Highlighter",
+  "description": "Enhances Markdown preview with theme-aware syntax highlighting for code blocks",
+  "version": "0.1.0",
+  "publisher": "real-fruit-snacks",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "syntax highlighting",
+    "preview",
+    "theme",
+    "code blocks"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "markdown.previewScripts": [
+      "./out/preview/previewScript.js"
+    ],
+    "configuration": {
+      "title": "Markdown Code Block Highlighter",
+      "properties": {
+        "markdownCodeBlockHighlighter.enableHighlighting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable theme-aware syntax highlighting in Markdown preview"
+        },
+        "markdownCodeBlockHighlighter.fontSize": {
+          "type": "number",
+          "default": 0,
+          "description": "Font size for code blocks in pixels (0 uses VS Code default)"
+        },
+        "markdownCodeBlockHighlighter.lineHeight": {
+          "type": "number",
+          "default": 1.5,
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Line height multiplier for code blocks"
+        },
+        "markdownCodeBlockHighlighter.enableCache": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable caching of tokenized code blocks for improved performance"
+        },
+        "markdownCodeBlockHighlighter.cacheSize": {
+          "type": "number",
+          "default": 100,
+          "minimum": 10,
+          "maximum": 1000,
+          "description": "Maximum number of cached code blocks"
+        },
+        "markdownCodeBlockHighlighter.maxBlockSize": {
+          "type": "number",
+          "default": 10000,
+          "minimum": 1000,
+          "maximum": 100000,
+          "description": "Maximum size in characters for code blocks to highlight (larger blocks will use fallback)"
+        },
+        "markdownCodeBlockHighlighter.enablePerfMonitoring": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable performance monitoring and logging (for debugging)"
+        },
+        "markdownCodeBlockHighlighter.lazyLoadThreshold": {
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Number of screens ahead to preload code blocks (for lazy loading)"
+        },
+        "markdownCodeBlockHighlighter.tokenizationTimeout": {
+          "type": "number",
+          "default": 5000,
+          "minimum": 1000,
+          "maximum": 30000,
+          "description": "Maximum time in milliseconds to spend tokenizing a single code block"
+        },
+        "markdownCodeBlockHighlighter.batchDelay": {
+          "type": "number",
+          "default": 50,
+          "minimum": 10,
+          "maximum": 500,
+          "description": "Debounce delay in milliseconds for batching tokenization requests"
+        },
+        "markdownCodeBlockHighlighter.concurrentRequests": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Maximum number of concurrent tokenization requests"
+        },
+        "markdownCodeBlockHighlighter.showBorder": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show theme-matching border around code blocks"
+        },
+        "markdownCodeBlockHighlighter.borderWidth": {
+          "type": "number",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Border width in pixels"
+        },
+        "markdownCodeBlockHighlighter.borderRadius": {
+          "type": "number",
+          "default": 4,
+          "minimum": 0,
+          "maximum": 12,
+          "description": "Border radius in pixels for rounded corners"
+        },
+        "markdownCodeBlockHighlighter.showCopyButton": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show copy button on code blocks"
+        },
+        "markdownCodeBlockHighlighter.copyButtonPosition": {
+          "type": "string",
+          "default": "top-right",
+          "enum": [
+            "top-right",
+            "top-left",
+            "bottom-right",
+            "bottom-left"
+          ],
+          "enumDescriptions": [
+            "Position copy button in top-right corner",
+            "Position copy button in top-left corner",
+            "Position copy button in bottom-right corner",
+            "Position copy button in bottom-left corner"
+          ],
+          "description": "Position of the copy button within code blocks"
+        },
+        "markdownCodeBlockHighlighter.copyButtonVisibility": {
+          "type": "string",
+          "default": "hover",
+          "enum": [
+            "hover",
+            "always"
+          ],
+          "enumDescriptions": [
+            "Show copy button only when hovering over code block",
+            "Always show copy button"
+          ],
+          "description": "When to display the copy button"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js",
+    "test:unit": "npm run pretest && npm test",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "test:compile": "tsc -p ./ --noEmit",
+    "test:extension": "node scripts/test-extension.js",
+    "test:benchmark": "node scripts/benchmark.js",
+    "test:manual": "echo \"Open TEST_PROCEDURES.md for manual test procedures\"",
+    "test:all": "npm run test:compile && npm run test:unit && npm run test:benchmark",
+    "clean": "rimraf out"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.2.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.0.0",
+    "@types/sinon": "^21.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^2.19.0",
+    "chai": "^6.2.2",
+    "eslint": "^8.0.0",
+    "glob": "^13.0.0",
+    "mocha": "^11.7.5",
+    "sharp": "^0.34.5",
+    "sinon": "^21.0.1",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/markdown-code-block-highlighter"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/markdown-code-block-highlighter/issues"
+  },
+  "license": "MIT"
+}

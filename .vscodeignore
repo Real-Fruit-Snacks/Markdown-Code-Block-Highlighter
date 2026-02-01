@@ -1,0 +1,39 @@
+# Source files
+src/**
+.vscode/**
+.vscode-test/**
+
+# TypeScript configuration
+tsconfig.json
+tslint.json
+.eslintrc.json
+
+# Build files
+**/*.ts
+**/*.map
+
+# Documentation (dev)
+ARCHITECTURE.md
+
+# Tests
+test/**
+**/.DS_Store
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node modules
+node_modules
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Other
+.editorconfig
